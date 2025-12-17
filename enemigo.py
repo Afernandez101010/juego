@@ -1,14 +1,13 @@
 
 import personaje
-class Personaje:
-    def __init__(self, nombre, nivel, clase ):
-        self.nombre = nombre
-        self._nivel = nivel
-        super().__init__(clase)
+class Enemigo(personaje):
+    def __init__(self, raza, nivel, clase ):
+        super().__init__(clase, nivel)
+        self.raza = raza
 
     @property
     def nivel(self):
-        return self._nivel
+        return super().__init__(self.nivel)
         
     nivel.setter
     def nivel(self, nuevo_nivel):

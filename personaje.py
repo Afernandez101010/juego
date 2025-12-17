@@ -1,5 +1,7 @@
+from abc import ABC, abstractmethod
 class Personaje:
-    def __init__(self, nombre, nivel, clase):
+    @abstractmethod
+    def __init__(self, nivel, clase, nombre = ""):
         self.nombre = nombre
         self._nivel = nivel
         self.__clase = clase

@@ -1,13 +1,12 @@
 import personaje
-class Personaje:
-    def __init__(self, nombre, nivel, clase ):
-        self.nombre = nombre
-        self._nivel = nivel
-        super().__init__(clase)
-        
+class Compañero(personaje):
+    def __init__(self, compi, nivel, clase ):
+        super().__init__(clase, nivel)
+        self.compi = compi
+
     @property
     def nivel(self):
-        return self._nivel
+        return super().__init__(self._nivel)
         
     nivel.setter
     def nivel(self, nuevo_nivel):
