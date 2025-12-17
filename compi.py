@@ -1,8 +1,9 @@
 import personaje
 class Compi(personaje):
-    def __init__(self, compi, nivel, clase ):
-        super().__init__(clase, nivel)
+    def __init__(self, compi, nivel, clase, hpCompi):
+        super().__init__(nivel)
         self.compi = compi
+        self.__hp = hpCompi
 
     @property
     def nivel(self):
