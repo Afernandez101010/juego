@@ -13,3 +13,4 @@ class Personaje:
     nivel.setter
     def nivel(self, nuevo_nivel):
         self._nivel = nuevo_nivel
+    

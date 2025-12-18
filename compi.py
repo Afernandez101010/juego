@@ -11,3 +11,4 @@ class Compi(personaje):
     nivel.setter
     def nivel(self, nuevo_nivel):
         self._nivel = nuevo_nivel
+        
