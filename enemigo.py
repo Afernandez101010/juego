@@ -1,17 +1,27 @@
+from abc import ABC
+from habilidades import Habilidades
 
-import personaje
-class Enemigo(personaje):
-    def __init__(self, nivel , hp= 10, daño=10, raza= "orco"):
-        super().__init__(nivel)
-        self.raza = raza
-        self.__hp= hp
-        self.__daño = daño
+class Enemigo(Habilidades, ABC):
+    def __init__(self, nombre="Enemigo", hp=80, daño=12):
+        self.nombre = nombre           # público: para mostrar en menú
+        self._nivel = 1                # protegido: nivel para subir dificultad
+        self.__hp = hp                 # privado
+        self.__daño = daño             # privado
+        self._cooldown = 2             # protegido para habilidades especiales
 
-    @property
-    def nivel(self):
-        return super().__init__(self.nivel)
-        
-    nivel.setter
-    def nivel(self, nuevo_nivel):
-        self._nivel = nuevo_nivel
+    def atacar(self, objetivo):
+        if self._cooldown >= 2:
+            self.usar_habilidad(objetivo)
+            self._cooldown = 0
+        else:
+            self._cooldown += 1
+            objetivo.recibir_daño(self.__daño)
+            print(f"{self.nombre} ataca y hace {self.__daño} de daño")
 
+    def recibir_daño(self, daño):
+        self.__hp -= daño
+        if self.__hp < 0:
+            self.__hp = 0
+
+    def ver_hp(self):
+        return self.__hp

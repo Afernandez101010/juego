@@ -1,14 +1,26 @@
-import personaje
-class Compi(personaje):
-    def __init__(self, compi, nivel, clase, hpCompi):
-        super().__init__(nivel)
-        self.compi = compi
-        self.__hp = hpCompi
+from personaje import Personaje
 
-    @property
-    def nivel(self):
-        return super().__init__(self._nivel)
-        
-    nivel.setter
-    def nivel(self, nuevo_nivel):
-        self._nivel = nuevo_nivel
+class Compi(Personaje):
+    def __init__(self, nombre="Paco"):
+        super().__init__(nombre, hp=100, daño=8)
+
+    def atacar(self, objetivo):
+        if self._cooldown >= 2:
+            usar = input(f"{self.nombre}: ¿Usar habilidad especial? (s/n): ").lower()
+            while usar not in ("s","n"):
+                usar = input("Por favor ingresa 's' o 'n': ").lower()
+            if usar == "s":
+                self.usar_habilidad(objetivo)
+                self._cooldown = 0
+                return
+            elif usar == "n":
+                objetivo.recibir_daño(self._Personaje__daño)
+        else:
+            self._cooldown += 1
+            objetivo.recibir_daño(self._Personaje__daño)
+        print(f"{self.nombre} ataca con espada y hace {self._Personaje__daño} de daño")
+
+    def usar_habilidad(self, objetivo):
+        daño = self._Personaje__daño + 5
+        objetivo.recibir_daño(daño)
+        print(f"{self.nombre} usa apoyo especial y hace {daño} de daño")

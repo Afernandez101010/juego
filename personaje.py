@@ -1,34 +1,26 @@
 from abc import ABC, abstractmethod
-class Personaje:
-    @abstractmethod
-    def __init__(self,  Vida= 100, nombre = "", nivel= 1, clase= "", daño= 0):
-        self.nombre = nombre
-        self._nivel = nivel
-        self.__clase = clase
-        self.__hp = Vida
-        self.__daño = daño
+from habilidades import Habilidades
 
-    @property
-    def nivel(self):
-        return self._nivel
-        
-    nivel.setter
-    def nivel(self, nuevo_nivel):
-        self._nivel = nuevo_nivel
+class Personaje(Habilidades, ABC):
+    def __init__(self, nombre="", hp=100, daño=0):
+        self.nombre = nombre           # público: se muestra en el menú
+        self._nivel = 1                # protegido: accesible por hijas
+        self.__hp = hp                 # privado: control interno de la clase
+        self.__daño = daño             # privado: control del daño base
+        self._cooldown = 2             # protegido: para la lógica de ataques especiales
 
-    def crear_pj(self):
-        nombre=input("Dime el nombre: ")
-        self.nombre = nombre
-        print("Clases: Guerrero / Mago")
-        clase=input("Dime la clase: ").lower()
-        if clase == "guerrero" or clase == "mago":
-            self.__clase = clase
-        else:
-            print("Esa clase no es correcta")
+    def recibir_daño(self, daño):
+        self.__hp -= daño
+        if self.__hp < 0:
+            self.__hp = 0
 
-    def atacar(self):
-        if self.__clase == "guerrero":
-            self.__daño = 12
-            
-        else:
-            print("No has creado un personaje. ")
+    def ver_hp(self):
+        return self.__hp
+
+    def subir_nivel(self):
+        self._nivel += 1
+        self.__daño += 1
+        self.__hp = 100
+        print(f"{self.nombre} ha subido a nivel {self._nivel}")
+        print(f"El daño ahora es {self.__daño}")
+        print(f"HP restaurado a {self.__hp}%")
